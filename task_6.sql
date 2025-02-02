@@ -16,3 +16,4 @@ SELECT * FROM customers WHERE customer_id = 3;
 
 -- Ensure the customer with customer_id=4 is inserted
 SELECT * FROM customers WHERE customer_id = 4;
+mysql -u root -p < task_6.sql alx_book_store
