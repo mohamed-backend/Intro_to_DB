@@ -1,2 +1,5 @@
--- This script lists the columns in the books table using SHOW CREATE TABLE
-SHOW CREATE TABLE books;
+SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE, COLUMN_DEFAULT, CHARACTER_MAXIMUM_LENGTH, NUMERIC_PRECISION
+FROM information_schema.columns
+WHERE table_schema = DATABASE() 
+  AND table_name = 'books'
+ORDER BY ORDINAL_POSITION;
