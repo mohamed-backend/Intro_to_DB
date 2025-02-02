@@ -1,12 +1,28 @@
--- Use the provided database (this will be passed as an argument when executing the script)
-USE DATABASE;
+#!/bin/bash
 
--- Query the INFORMATION_SCHEMA to get details about the columns in the 'books' table
-SELECT COLUMN_NAME AS 'Column Name',
-       COLUMN_TYPE AS 'Column Type',
-       IS_NULLABLE AS 'Is Nullable',
-       COLUMN_DEFAULT AS 'Default Value',
-       EXTRA AS 'Extra Information'
-FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_SCHEMA = DATABASE()
-  AND TABLE_NAME = 'books';
+# Define the SQL file
+SQL_FILE="task_4.sql"
+DATABASE_NAME="alx_book_store"
+
+# Check if the SQL file exists
+if [ ! -f "$SQL_FILE" ]; then
+    echo "Error: $SQL_FILE does not exist."
+    exit 1
+fi
+
+# Check if the SQL file is empty
+if [ ! -s "$SQL_FILE" ]; then
+    echo "Error: $SQL_FILE is empty."
+    exit 1
+fi
+
+# Execute the SQL script with the MySQL command
+mysql -u root -p "$DATABASE_NAME" < "$SQL_FILE"
+
+# Check if the MySQL command was successful
+if [ $? -eq 0 ]; then
+    echo "SQL script executed successfully."
+else
+    echo "Error executing the SQL script."
+    exit 1
+fi
